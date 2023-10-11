@@ -23,7 +23,7 @@
 
 3. What business functions are involved in Human Resources?
 
-- Recruiting and hiring, Training, Payroll, Benefits, Government compliance (2p
+- Recruiting and hiring, Training, Payroll, Benefits, Government compliance (2p)
 
 4. Explain why functional areas are interdependent.
 
@@ -53,3 +53,4 @@
 - include recording raw data about sales transactions, raw material purchases, payroll, and receipt of cash from customers
   o Raw data
    Simply numbers collected from sales, manufacturing, and other operations – without any manipulation, calculation, or arrangement for presentation.
+  0
