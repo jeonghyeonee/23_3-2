@@ -208,5 +208,126 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // List
+        val numbers = listOf("one", "two", "three", "four")
+        Log.d("ITM", "Number of elements: ${numbers.size}")
+        Log.d("ITM", "Third of elements: ${numbers.get(2)}")
+        Log.d("ITM", "Fourth of elements: ${numbers[3]}")
+        Log.d("ITM", "Index of element \"two\": ${numbers.indexOf("two")}")
+
+        // mutableList
+        val numbers2 = mutableListOf(1,2,3,4)
+        numbers2.add(5)
+        numbers2.removeAt(1)
+        Log.d("ITM", "${numbers2}")
+
+        numbers2[0] = 0
+        numbers2.shuffle()
+        Log.d("ITM", "${numbers2}")
+
+        // Set
+        val numbers3 = setOf(1,2,3,4)
+        Log.d("ITM", "Number of elements: ${numbers3.size}")
+        if(numbers3.contains(1)) Log.d("ITM", "1 is in the set")
+
+        val numbersBackward = setOf(4,3,2,1)
+        Log.d("ITM", "The sets are equal: ${numbers3 == numbersBackward}")
+
+        // mutableSet
+        val depts = mutableSetOf("ITM")
+        Log.d("ITM", "Number of elements: ${depts.size}")
+        Log.d("ITM", "${depts}")
+
+        depts.add("IISE")
+        depts.add("AIX")
+        depts.add("Computer")
+        Log.d("ITM", "${depts}")
+
+        depts.remove("Data science")
+        depts.remove("IISE")
+        Log.d("ITM", "${depts}")
+
+        // Map
+        val studentGrade = mutableMapOf<String, Int>()
+        studentGrade.put("Jeong", 100)
+        studentGrade.put("Kim", 90)
+        studentGrade.put("Hong", 80)
+        studentGrade.put("Park", 70)
+
+        val studentGrade2 = mutableMapOf<String, Int>("Jeong" to 100, "Kim" to 90, "Hong" to 80, "Park" to 70)
+        val studentGrade3 = mutableMapOf<String, Int>(Pair("Jeong", 100), Pair("Kim", 90), Pair("Hong", 80), Pair("Park", 70))
+
+        Log.d("ITM", "${studentGrade}")
+
+        Log.d("ITM", "${studentGrade.get("Jeong")}")
+        Log.d("ITM", "${studentGrade.get("Wow")}")
+
+        studentGrade.put("Jeong", 0)
+        Log.d("ITM", "${studentGrade}")
+
+        // Transformation
+        // map
+        val numbers4 = setOf(1,2,3,4,5)
+        val numbers5 = numbers4.map{it*2}
+
+        Log.d("ITM", "${numbers4}")
+        Log.d("ITM", "${numbers5}")
+
+        val studentGrade4 = mutableMapOf<String, Int>()
+        studentGrade4.put("Jinwoo", 100)
+        studentGrade4.put("Kim", 90)
+        studentGrade4.put("Hong", 80)
+        studentGrade4.put("Park", 70)
+
+        val grade2 = studentGrade4.mapValues { it.value / 10 }
+        Log.d("ITM", "${grade2}")
+
+        // zip
+        val colors = listOf("red", "brown", "grey")
+        val animals = listOf("fox", "bear", "wolf")
+        Log.d("ITM", "${colors zip animals}")
+
+        val twoAnimals = listOf("fox", "bear")
+        Log.d("ITM", "${colors.zip(twoAnimals)}")
+
+        Log.d("ITM", "${colors.zip(animals) {color, animal -> "The ${color.replaceFirstChar { it.uppercase() }} is $animal"}}")
+
+        // filter
+        val numbers6 = listOf("one", "two", "three", "four")
+        val longerThan3 = numbers6.filter{ it.length > 3 }
+        Log.d("ITM", "$longerThan3")
+
+        val numbersMap = mapOf("key 1" to 1, "key2" to 2, "key3" to 3, "key11" to 11)
+        val filterMap = numbersMap.filter { (key, value) -> key.endsWith("1")&&value > 10 }
+        Log.d("ITM", "$filterMap")
+
+
+        // Retrieval
+        // first()/last()
+
+        val numbers7 = listOf("one", "two", "three", "four", "five", "six")
+        Log.d("ITM", numbers7.first {it.length > 3})
+        Log.d("ITM", numbers7.last {it.startsWith("f")})
+
+        val numbers8 = listOf(1,2,3,4)
+        Log.d("ITM", "${numbers8.find {it % 2 == 0}}")
+        Log.d("ITM", "${numbers8.findLast { it % 2 == 0 }}")
+
+        // Aggregate
+        val numbers9 = listOf(6, 42, 10, 4)
+
+        Log.d("ITM", "Count: ${numbers9.count()}")
+        Log.d("ITM", "Max: ${numbers9.maxOrNull()}")
+        Log.d("ITM", "Min: ${numbers9.minOrNull()}")
+        Log.d("ITM", "Average: ${numbers9.average()}")
+        Log.d("ITM", "Sum: ${numbers9.sum()}")
+
+        // Iterator
+        val numbers10 = listOf("one", "two", "three", "four")
+        val numbersIterator = numbers10.iterator()
+        while (numbersIterator.hasNext()){
+            Log.d("ITM", numbersIterator.next())
+        }
+
     }
 }
