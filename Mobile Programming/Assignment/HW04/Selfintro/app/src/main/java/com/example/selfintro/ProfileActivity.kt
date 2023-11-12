@@ -15,25 +15,36 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Show the profile information
         showProfileInfo()
+
+        // Show the work experiences
         showWorkExperiences()
+
+        // Show the education details
         showEducation()
+
+        // Show the extracurricular activities
         showActivities()
     }
 
+    /**
+     * Function to display the profile information.
+     */
     private fun showProfileInfo() {
-        // 예시로 이름과 간단한 소개를 텍스트 뷰에 표시
         binding.profileName.text = "Jeonghyeon Lee"
         binding.profileIntroduction.text = "POSITIVE WAVE\nHello! I'm Jeonghyeon Lee, \naspiring Software Engineer residing"
 
+        // Display skills information
         val skillsText = """
             Kotlin, Java, Android, Python, C, MySQL, EC2, DynamoDB, Oracle, Lambda, AWS HTML, CSS, JavaScript, PHP, Hadoop, Hive
-            
-            """.trimIndent()
-
+        """.trimIndent()
         binding.skillContents.text = skillsText
     }
 
+    /**
+     * Function to display work experiences using a RecyclerView.
+     */
     private fun showWorkExperiences() {
         // Create a list of Work Experiences (replace with your data)
         val workExperiences = listOf(
@@ -50,6 +61,9 @@ class ProfileActivity : AppCompatActivity() {
         binding.recyclerWorkExperience.layoutManager = LinearLayoutManager(this)
     }
 
+    /**
+     * Function to display education details using a RecyclerView.
+     */
     private fun showEducation() {
         // Create a list of Education (replace with your data)
         val educations = listOf(
@@ -67,15 +81,22 @@ class ProfileActivity : AppCompatActivity() {
         binding.recyclerEducation.layoutManager = LinearLayoutManager(this)
     }
 
+    /**
+     * Function to display extracurricular activities using a RecyclerView.
+     */
     private fun showActivities() {
         // Create a list of Activities (replace with your data)
         val activities = listOf(
-            Activity("GDSC(Google Developer Student Clubs) Seoul National University of Science and Technology", "Deep Learning Core", "2023.08. ~", R.drawable.gdsc),
-            Activity("ACC (AWS Cloud Clubs) SeoulTech", "Co-Captain", "2023.07. ~ ", R.drawable.acc),
-            Activity("Seoul National University of Science and Technology", "Team Leader, Hi Hadoop (Global Challenger)", "2022.05. ~ 2022.10.", R.drawable.hadoop),
-            Activity("BOAZ(Bigdata is Our A to Z) Union Club ", "17th President ", "2021.07. ~ 2022.08.", R.drawable.boaz),
-            Activity("STEM(Seoul Tech Encouraging Mentor) Student Ambassador  ", "Vice President", "2021.05. ~ ", R.drawable.stem)
-
+            Activity("GDSC(Google Developer Student Clubs) Seoul National University of Science and Technology",
+                "Deep Learning Core", "2023.08. ~", R.drawable.gdsc),
+            Activity("ACC (AWS Cloud Clubs) SeoulTech", "Co-Captain",
+                "2023.07. ~ ", R.drawable.acc),
+            Activity("Seoul National University of Science and Technology",
+                "Team Leader, Hi Hadoop (Global Challenger)", "2022.05. ~ 2022.10.", R.drawable.hadoop),
+            Activity("BOAZ(Bigdata is Our A to Z) Union Club",
+                "17th President", "2021.07. ~ 2022.08.", R.drawable.boaz),
+            Activity("STEM(Seoul Tech Encouraging Mentor) Student Ambassador",
+                "Vice President", "2021.05. ~ ", R.drawable.stem)
         )
 
         // Create an adapter for Activities
@@ -88,7 +109,3 @@ class ProfileActivity : AppCompatActivity() {
         binding.recyclerActivities.layoutManager = LinearLayoutManager(this)
     }
 }
-
-
-
-

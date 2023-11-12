@@ -8,7 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- 이름과 간단한 소개 -->
         <TextView
             android:id="@+id/profileName"
             android:layout_width="wrap_content"
