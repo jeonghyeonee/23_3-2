@@ -1,57 +1,71 @@
 package com.example.selfintro
 
-import android.os.Bundle
-import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import com.example.selfintro.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.appBarMain.toolbar)
-
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        // "Go to Profile" 버튼 클릭 시
+        binding.btnGoToProfile.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+
+        // "Go to Projects" 버튼 클릭 시
+        binding.btnGoToProjects.setOnClickListener {
+            startActivity(Intent(this, ProjectsActivity::class.java))
+        }
+
+        binding.btnContact.setOnClickListener {
+            showContactPopup()
+        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
+    private fun showContactPopup() {
+        val inflater = LayoutInflater.from(this)
+        val view = inflater.inflate(R.layout.contact_popup, null)
+
+        // 팝업에 메일과 링크드인 연결 버튼 추가
+        view.findViewById<Button>(R.id.btnEmail).setOnClickListener {
+            sendEmail()
+        }
+
+        view.findViewById<Button>(R.id.btnLinkedIn).setOnClickListener {
+            openLinkedInProfile()
+        }
+
+        // 팝업 빌더 생성
+        val builder = AlertDialog.Builder(this)
+        builder.setView(view)
+
+        // 팝업 생성 및 표시
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    private fun sendEmail() {
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        emailIntent.data = Uri.parse("mailto:workhappyj@gmail.com")
+        startActivity(emailIntent)
     }
+
+    private fun openLinkedInProfile() {
+        val linkedInIntent = Intent(Intent.ACTION_VIEW)
+        linkedInIntent.data = Uri.parse("https://www.linkedin.com/in/jeonghyeon-lee-9b6380223/")
+        startActivity(linkedInIntent)
+    }
+
 }
