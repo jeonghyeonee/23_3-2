@@ -1,8 +1,8 @@
 package com.example.selfintro
 
-data class Item(
+data class WorkExperience(
     val jobTitle: String,
     val companyName: String,
     val duration: String,
-    val imageUrl: Int
+    val imageResource: Int
 )

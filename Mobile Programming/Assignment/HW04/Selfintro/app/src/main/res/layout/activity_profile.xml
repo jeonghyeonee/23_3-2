@@ -1,38 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 이름과 간단한 소개 -->
-    <TextView
-        android:id="@+id/profileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Your Name"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/profileIntroduction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your introduction goes here."
-        android:textSize="14sp"
-        android:textStyle="italic"
-        android:layout_below="@id/profileName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:gravity="center"/>
-
-    <!-- RecyclerView for Skills -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerItem"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profileIntroduction"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_height="wrap_content">
 
+        <!-- 이름과 간단한 소개 -->
+        <TextView
+            android:id="@+id/profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Your Name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/profileIntroduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your introduction goes here."
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:layout_below="@id/profileName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:gravity="center"/>
+
+        <!-- TextView for Skills Section -->
+        <TextView
+            android:id="@+id/textSkills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skills"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_below="@id/profileIntroduction"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <!-- TextView for Skill Contents -->
+        <TextView
+            android:id="@+id/skillContents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textSkills"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Your skills go here." />
+
+        <!-- RecyclerView for Work Experiences Section -->
+        <TextView
+            android:id="@+id/textWorkExperience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Work Experiences"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_below="@id/skillContents"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <!-- RecyclerView for Work Experiences -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerWorkExperience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textWorkExperience"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <!-- RecyclerView for Education Section -->
+        <TextView
+            android:id="@+id/textEducation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Education"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_below="@id/recyclerWorkExperience"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <!-- RecyclerView for Education -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerEducation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textEducation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <!-- RecyclerView for Activities Section -->
+        <TextView
+            android:id="@+id/textActivities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Activities"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_below="@id/recyclerEducation"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+        <!-- RecyclerView for Activities -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerActivities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textActivities"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp" />
+
+    </RelativeLayout>
+</ScrollView>

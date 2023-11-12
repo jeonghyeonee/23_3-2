@@ -9,7 +9,7 @@
 
     <!-- Left: Image -->
     <ImageView
-        android:id="@+id/experienceImage"
+        android:id="@+id/img"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
@@ -21,14 +21,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/experienceImage"
+        android:layout_toEndOf="@id/img"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical">
 
         <!-- Job Title -->
         <TextView
-            android:id="@+id/experienceJobTitle"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Job Title"
@@ -37,7 +37,7 @@
 
         <!-- Company Name -->
         <TextView
-            android:id="@+id/experienceCompanyName"
+            android:id="@+id/subTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Company Name"
@@ -45,7 +45,7 @@
 
         <!-- Duration -->
         <TextView
-            android:id="@+id/experienceDuration"
+            android:id="@+id/duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Duration"
