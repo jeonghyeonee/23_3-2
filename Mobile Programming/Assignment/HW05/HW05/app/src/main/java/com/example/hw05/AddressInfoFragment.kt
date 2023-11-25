@@ -1,17 +1,18 @@
 package com.example.hw05
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.hw05.databinding.FragmentAddressInfoBinding
 
 class AddressInfoFragment : Fragment() {
 
     private lateinit var binding: FragmentAddressInfoBinding
-    private lateinit var dataTransferListener: DataTransferListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,39 +26,25 @@ class AddressInfoFragment : Fragment() {
             val postalCode = binding.postalCodeEditText.text.toString()
             val address = binding.addressEditText.text.toString()
 
-            dataTransferListener.onAddressInfoFilled(address, postalCode, city)
+            saveAddressToSharedPreferences(city, postalCode, address)
 
-            // Done 버튼을 누를 때 SubFragment 업데이트
-            updateSubFragment()
+            // Perform any other actions as needed
+
+            // For example, show a toast message
+             Toast.makeText(requireContext(), "Address information saved!", Toast.LENGTH_SHORT).show()
+
+            // You can navigate to the next fragment or perform other actions here
         }
 
         return view
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is DataTransferListener) {
-            dataTransferListener = context
-        } else {
-            throw ClassCastException("$context must implement DataTransferListener")
-        }
-    }
-
-    private fun updateSubFragment() {
-        // SubFragment 업데이트 코드 추가
-        val subFragment = SubFragment()
-        val bundle = Bundle()
-        bundle.putString("name", "")
-        bundle.putInt("age", 0)
-        bundle.putString("studentNumber", "")
-        bundle.putString("city", binding.cityEditText.text.toString())
-        bundle.putString("postalCode", binding.postalCodeEditText.text.toString())
-        bundle.putString("address", binding.addressEditText.text.toString())
-        subFragment.arguments = bundle
-
-        // SubFragment를 FragmentTransaction을 통해 추가
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.bottomFragmentContainer, subFragment)
-        transaction.commit()
+    private fun saveAddressToSharedPreferences(city: String, postalCode: String, address: String) {
+        val sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("city", city)
+        editor.putString("postalCode", postalCode)
+        editor.putString("address", address)
+        editor.apply()
     }
 }

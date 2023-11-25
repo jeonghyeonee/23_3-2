@@ -20,6 +20,10 @@ class SubFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSubBinding.inflate(inflater, container, false)
+
+        // Set initial state - show welcome message
+        showWelcomeState()
+
         return binding.root
     }
 
@@ -31,5 +35,30 @@ class SubFragment : Fragment() {
         binding.textViewAge.text = "Age: ${student.age}"
         binding.textViewCity.text = "City: ${student.city}"
         // 필요한 항목 추가
+
+        // Personal Information, Address Information 입력이 완료되면 UI 업데이트
+        showAfterInputViews()
+    }
+
+    private fun showWelcomeState() {
+        // 초기 상태 - Welcome 메시지만 보이게 설정
+//        binding.textWelcome.visibility = View.VISIBLE
+        binding.confirmationText.visibility = View.GONE
+        binding.textViewName.visibility = View.GONE
+        binding.textViewStudentNum.visibility = View.GONE
+        binding.textViewAge.visibility = View.GONE
+        binding.textViewCity.visibility = View.GONE
+        binding.reviewText.visibility = View.GONE
+    }
+
+    private fun showAfterInputViews() {
+        // Personal Information, Address Information 입력이 완료된 후에 호출되어야 하는 함수
+        // 여기에서는 각 뷰의 가시성을 변경하여 보이게 설정
+        binding.confirmationText.visibility = View.VISIBLE
+        binding.textViewName.visibility = View.VISIBLE
+        binding.textViewStudentNum.visibility = View.VISIBLE
+        binding.textViewAge.visibility = View.VISIBLE
+        binding.textViewCity.visibility = View.VISIBLE
+        binding.reviewText.visibility = View.VISIBLE
     }
 }

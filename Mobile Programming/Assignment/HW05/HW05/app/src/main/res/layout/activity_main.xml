@@ -48,6 +48,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/middleFragmentContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/middleFragmentContainer">
+
+        <!-- WelcomeFragment 추가 -->
+        <fragment
+            android:id="@+id/welcomeFragment"
+            android:name="com.example.hw05.WelcomeFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_welcome" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
