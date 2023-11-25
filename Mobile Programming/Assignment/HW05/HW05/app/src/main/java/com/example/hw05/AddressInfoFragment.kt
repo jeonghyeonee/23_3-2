@@ -35,7 +35,7 @@ class AddressInfoFragment : Fragment() {
             // Replace the current fragment in the bottom container with AddressInfoFragment
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.bottomFragmentContainer, AddressInfoFragment())
+            fragmentTransaction.replace(R.id.bottomFragmentContainer, ResultFragment())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

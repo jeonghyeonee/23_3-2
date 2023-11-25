@@ -1,5 +1,6 @@
 package com.example.hw05
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,17 +19,17 @@ class ResultFragment : Fragment() {
         binding = FragmentResultBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Argument에서 데이터를 받아오기
-        val name = arguments?.getString("name")
-        val age = arguments?.getString("age")
-        val studentNumber = arguments?.getString("studentNumber")
-        val city = arguments?.getString("city")
+        val sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
 
-        // 받아온 데이터를 화면에 표시
-        binding.textViewName.text = "Name: $name"
-        binding.textViewAge.text = "Age: $age"
-        binding.textViewStudentNum.text = "Student Num: $studentNumber"
-        binding.textViewCity.text = "City: $city"
+        val name = sharedPreferences.getString("name", "")
+        val age = sharedPreferences.getString("age", "")
+        val studentNumber = sharedPreferences.getString("studentNumber", "")
+        val city = sharedPreferences.getString("city", "")
+
+        binding.textViewName.text = "$name"
+        binding.textViewAge.text = "age"
+        binding.textViewStudentNum.text = "$studentNumber"
+        binding.textViewCity.text = "$city"
 
         return view
     }
