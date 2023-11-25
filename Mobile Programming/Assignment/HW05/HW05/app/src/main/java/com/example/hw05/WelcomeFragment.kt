@@ -18,9 +18,4 @@ class WelcomeFragment : Fragment() {
         binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-    fun displayWelcomeMessage(name: String, age: Int, studentNumber: String, city: String) {
-        val welcomeMessage = "Welcome, $name!\nAge: $age\nStudent Number: $studentNumber\nCity: $city"
-        binding.textWelcome.text = welcomeMessage
-    }
 }

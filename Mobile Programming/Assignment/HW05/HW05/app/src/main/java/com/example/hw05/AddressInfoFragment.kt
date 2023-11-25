@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.example.hw05.databinding.FragmentAddressInfoBinding
 
 class AddressInfoFragment : Fragment() {
@@ -28,12 +29,15 @@ class AddressInfoFragment : Fragment() {
 
             saveAddressToSharedPreferences(city, postalCode, address)
 
-            // Perform any other actions as needed
+            // Display a message or perform any other action as needed
+            Toast.makeText(requireContext(), "Address information saved!", Toast.LENGTH_SHORT).show()
 
-            // For example, show a toast message
-             Toast.makeText(requireContext(), "Address information saved!", Toast.LENGTH_SHORT).show()
-
-            // You can navigate to the next fragment or perform other actions here
+            // Replace the current fragment in the bottom container with AddressInfoFragment
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.bottomFragmentContainer, AddressInfoFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         return view
