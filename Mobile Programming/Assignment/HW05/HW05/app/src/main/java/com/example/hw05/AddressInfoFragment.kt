@@ -1,38 +1,59 @@
 package com.example.hw05
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import com.example.hw05.databinding.FragmentAddressInfoBinding
 
 class AddressInfoFragment : Fragment() {
 
-    private lateinit var binding: FragmentAddressInfoBinding
+    private lateinit var onDataTransferListener: OnDataTransferListener
+    private lateinit var cityEditText: EditText
+    private lateinit var postalCodeEditText: EditText
+    private lateinit var addressEditText: EditText
+    private lateinit var doneButton: Button
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnDataTransferListener) {
+            onDataTransferListener = context
+        } else {
+            throw ClassCastException("$context must implement OnDataTransferListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddressInfoBinding.inflate(inflater, container, false)
-        val view = binding.root
+        val view = inflater.inflate(R.layout.fragment_address_info, container, false)
 
-        binding.doneButton.setOnClickListener {
-            val city = binding.cityEditText.text.toString()
-            val postalCode = binding.postalCodeEditText.text.toString()
-            val address = binding.addressEditText.text.toString()
+        // Initialize UI components
+        cityEditText = view.findViewById(R.id.cityEditText)
+        postalCodeEditText = view.findViewById(R.id.postalCodeEditText)
+        addressEditText = view.findViewById(R.id.addressEditText)
+        doneButton = view.findViewById(R.id.doneButton)
 
-            saveAddressToSharedPreferences(city, postalCode, address)
+        // Set click listener for the "Done" button
+        doneButton.setOnClickListener {
+            // Get the entered address information
+            val city = cityEditText.text.toString()
+            val postalCode = postalCodeEditText.text.toString()
+            val address = addressEditText.text.toString()
 
-            // Display a message or perform any other action as needed
-            Toast.makeText(requireContext(), "Address information saved!", Toast.LENGTH_SHORT).show()
+            // Create an AddressInfo instance
+            val addressInfo = AddressInfo(city, postalCode, address)
 
-            // Replace the current fragment in the bottom container with AddressInfoFragment
+            // Notify MainActivity about the data transfer
+            onDataTransferListener.onAddressInfoDataTransfer(addressInfo)
+
+            // Replace the current fragment in the bottom container with ResultFragment
             val fragmentManager = parentFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.bottomFragmentContainer, ResultFragment())
@@ -41,14 +62,5 @@ class AddressInfoFragment : Fragment() {
         }
 
         return view
-    }
-
-    private fun saveAddressToSharedPreferences(city: String, postalCode: String, address: String) {
-        val sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("city", city)
-        editor.putString("postalCode", postalCode)
-        editor.putString("address", address)
-        editor.apply()
     }
 }

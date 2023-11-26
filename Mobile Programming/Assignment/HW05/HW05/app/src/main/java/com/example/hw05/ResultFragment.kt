@@ -7,9 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hw05.databinding.FragmentResultBinding
+import android.os.Parcelable
 
+// Import the AddressInfo class
+import com.example.hw05.AddressInfo
+
+// Fragment to display the result based on saved information in SharedPreferences
 class ResultFragment : Fragment() {
 
+    // View Binding instance for the fragment's layout
     private lateinit var binding: FragmentResultBinding
 
     override fun onCreateView(
@@ -19,18 +25,14 @@ class ResultFragment : Fragment() {
         binding = FragmentResultBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
-
-        val name = sharedPreferences.getString("name", "")
-        val age = sharedPreferences.getString("age", "")
-        val studentNumber = sharedPreferences.getString("studentNumber", "")
-        val city = sharedPreferences.getString("city", "")
-
-        binding.textViewName.text = "$name"
-        binding.textViewAge.text = "age"
-        binding.textViewStudentNum.text = "$studentNumber"
-        binding.textViewCity.text = "$city"
+        // Display retrieved information in the corresponding TextViews
+        binding.textViewName.text = (requireActivity() as? OnDataTransferListener)?.getStudentInfo()?.name
+        binding.textViewAge.text = (requireActivity() as? OnDataTransferListener)?.getStudentInfo()?.age
+        binding.textViewCity.text = (requireActivity() as? OnDataTransferListener)?.getAddressInfo()?.city
+        binding.textViewStudentNum.text = (requireActivity() as? OnDataTransferListener)?.getStudentInfo()?.studentNumber
 
         return view
     }
+
+
 }

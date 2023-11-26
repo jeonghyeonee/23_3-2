@@ -1,7 +1,6 @@
 package com.example.hw05
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +9,23 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 
 class PersonalInfoFragment : Fragment() {
 
+    private lateinit var onDataTransferListener: OnDataTransferListener
     private lateinit var nameEditText: EditText
     private lateinit var ageEditText: EditText
     private lateinit var studentNumEditText: EditText
     private lateinit var nextButton: Button
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnDataTransferListener) {
+            onDataTransferListener = context
+        } else {
+            throw ClassCastException("$context must implement OnDataTransferListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,22 +33,24 @@ class PersonalInfoFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_personal_info, container, false)
 
+        // Initialize UI components
         nameEditText = view.findViewById(R.id.nameEditText)
         ageEditText = view.findViewById(R.id.ageEditText)
         studentNumEditText = view.findViewById(R.id.studentNumEditText)
         nextButton = view.findViewById(R.id.nextButton)
 
+        // Set click listener for the "Next" button
         nextButton.setOnClickListener {
             // Get the entered information
             val name = nameEditText.text.toString()
             val age = ageEditText.text.toString()
             val studentNumber = studentNumEditText.text.toString()
 
-            // Save information to SharedPreferences
-            saveToSharedPreferences(name, age, studentNumber)
+            // Create a StudentInfo instance
+            val studentInfo = StudentInfo(name, age, studentNumber)
 
-            // Display a message or perform any other action as needed
-            Toast.makeText(requireContext(), "Information saved!", Toast.LENGTH_SHORT).show()
+            // Notify MainActivity about the data transfer
+            onDataTransferListener.onPersonalInfoDataTransfer(studentInfo)
 
             // Move to AddressInfoFragment
             val fragmentManager = parentFragmentManager
@@ -51,15 +61,5 @@ class PersonalInfoFragment : Fragment() {
         }
 
         return view
-    }
-
-    private fun saveToSharedPreferences(name: String, age: String, studentNumber: String) {
-        // Use SharedPreferences to save the information
-        val sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("name", name)
-        editor.putString("age", age)
-        editor.putString("studentNumber", studentNumber)
-        editor.apply()
     }
 }
